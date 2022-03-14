@@ -1,0 +1,237 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "object",
+  "properties": {
+    "ditcosModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "default": "&MOD-ID-000 model-id-000",
+              "type": "string"
+            },
+            "name": {
+              "default": "Name Template",
+              "type": "string"
+            },
+            "version": {
+              "default": 1,
+              "type": "number"
+            },
+            "author": {
+              "default": "Meikel Bode <m.bode@utwente.nl>",
+              "type": "string"
+            },
+            "description": {
+              "default": "This is a DITCOS model template",
+              "type": "string"
+            },
+            "entryService": {
+              "type": "object",
+              "properties": {
+                  "ref": {
+                      "description": "Refer to a service by its ID by adding *-sign.",
+                      "default": "*CS-ID-000",
+                      "type": "string"
+                  }
+              },
+              "required": [
+                  "ref"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "name",
+            "version",
+            "author",
+            "description",
+            "entryService"
+          ]
+        },
+        "businessRoles": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "allOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "businessRole": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "default": "&BR-ID br-id-000",
+                        "type": "string"
+                      },
+                      "name": {
+                        "default": "Name Template",
+                        "type": "string"
+                      },
+                      "kind": {
+                        "$ref": "ditcos-shared.schema.json#/definitions/businessRoles"
+                      },
+                      "description": {
+                        "default": "Description Template",
+                        "type": "string"
+                      },
+                      "requiredCapabilities": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {
+                          "allOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "capability": {
+                                  "type": "object",
+                                  "properties": {
+                                    "ref": {
+                                      "$ref": "ditcos-shared.schema.json#/definitions/capabilities"
+                                    }
+                                  },
+                                  "required": [
+                                    "ref"
+                                  ]
+                                }
+                              },
+                              "required": [
+                                "capability"
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name",
+                      "kind",
+                      "description",
+                      "requiredCapabilities"
+                    ]
+                  }
+                },
+                "required": [
+                  "businessRole"
+                ]
+              }
+            ]
+          }
+        },
+        "resources": {
+          "type": "array",
+          "additionalProperties": false,
+          "minItems": 1,
+          "items": {
+            "allOf": [
+              {
+                "properties": {
+                  "resource": {
+                    "type": "object",
+                    "properties": {
+                      "metadata": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "default": "&RES-ID res-id-000",
+                            "type": "string"
+                          },
+                          "name": {
+                            "default": "Name Template",
+                            "type": "string"
+                          },
+                          "version": {
+                            "default": 1,
+                            "type": "number"
+                          },
+                          "kind": {
+                            "$ref": "ditcos-shared.schema.json#/definitions/resourceKinds"
+                          },
+                          "description": {
+                            "default": "Description Template",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "name",
+                          "version",
+                          "kind",
+                          "description"
+                        ]
+                      },
+                      "specification": {
+                        "type": "object",
+                        "properties": {
+                          "mimeType": {
+                            "type": "string",
+                            "enum": [
+                              "application/pptx",
+                              "application/docx",
+                              "application/xlsx",
+                              "application/pdf",
+                              "application/txt"
+                            ]
+                          },
+                          "url": {
+                            "default": "https://link.to/the/document",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "mimeType",
+                          "url"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "metadata",
+                      "specification"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "services": {
+          "type": "array",
+          "additionalProperties": true,
+          "additionalItems": true,
+          "minItems": 1,
+          "items": {
+            "allOf": [
+              {
+                "properties": {
+                  "atomicService": {
+                    "$ref": "ditcos-atomicservice.schema.json#/definitions/atomicService"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "complexService": {
+                    "$ref": "ditcos-complexservice.schema.json#/definitions/complexService"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "metadata",
+        "businessRoles",
+        "resources",
+        "services"
+      ]
+    }
+  },
+  "required": [
+    "ditcosModel"
+  ]
+}

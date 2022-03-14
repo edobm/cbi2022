@@ -1,0 +1,391 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "additionalProperties": false,
+    "definitions": {
+        "atomicServiceKinds": {
+            "type": "string",
+            "oneOf": [
+                {
+                    "const": "AtomicService.Artifact.Customization",
+                    "description": "Customization of an artifact to clients needs."
+                },
+                {
+                    "const": "AtomicService.Artifact.Installation",
+                    "description": "Installation of an artifact."
+                },
+                {
+                    "const": "AtomicService.Artifact.Integration",
+                    "description": "Integration of an artifiact in an existing environment."
+                },
+                {
+                    "const": "AtomicService.Artifact.Setup",
+                    "description": "Setup up of an artifact."
+                },
+                {
+                    "const": "AtomicService.Artifact.Test",
+                    "description": "Test of an artifact following a test plan."
+                },
+                {
+                    "const": "AtomicService.Creative.Conceptualization",
+                    "description": "Create a concept for an artifact."
+                },
+                {
+                    "const": "AtomicService.Creative.Design",
+                    "description": "Design of an artifact."
+                },
+                {
+                    "const": "AtomicService.Creative.Implementation",
+                    "description": "Implementation of an artifact based on a concept and/or design."
+                },
+                {
+                    "const": "AtomicService.Creative.RequirementsEngineering",
+                    "description": "Identification and collection of requirements for an artifact."
+                },
+                {
+                    "const": "AtomicService.Interaction.Call",
+                    "description": "A call between different actors."
+                },
+                {
+                    "const": "AtomicService.Interaction.Interview",
+                    "description": "A interview to collect inputs from actors."
+                },
+                {
+                    "const": "AtomicService.Interaction.Meeting",
+                    "description": "A meeting of relevant actors to discuss certain topics."
+                },
+                {
+                    "const": "AtomicService.Interaction.Training",
+                    "description": "A training to transfer knowledge between actors."
+                },
+                {
+                    "const": "AtomicService.Interaction.Workshop",
+                    "description": "A workshop of relevant actors to work jointly on a certain topic."
+                },
+                {
+                    "const": "AtomicService.Operation.Auditing",
+                    "description": "An audit on a certain artifact."
+                },
+                {
+                    "const": "AtomicService.Operation.Monitoring",
+                    "description": "A continueous monitoring o a certain artifact."
+                },
+                {
+                    "const": "ComplexService",
+                    "description": "A complex service that is based on at least two other services."
+                }
+            ]
+        },
+        "businessRoles": {
+            "type": "string",
+            "additionalProperties": false,
+            "oneOf": [
+                {
+                    "const": "Client.SubjectMatterExpert",
+                    "description": "A business role representing an expert in a certain topic."
+                },
+                {
+                    "const": "Consultant.BusinessConsultant",
+                    "description": "A business role representing a consultant specialized in a certain business topic."
+                },
+                {
+                    "const": "Consultant.TechnicalConsultant",
+                    "description": "A business role representing a consultant specialized in a certain technological topic."
+                },
+                {
+                    "const": "General.ProjectManagement",
+                    "description": "A business role representing an expert in project management."
+                },
+                {
+                    "const": "System.Source",
+                    "description": "A business role representing a technological system (source perspective)."
+                },
+                {
+                    "const": "System.Target",
+                    "description": "A business role representing a technological system (target perspective)."
+                }
+            ]
+        },
+        "capabilities": {
+            "type": "string",
+            "additionalProperties": false,
+            "oneOf": [
+                {
+                    "const": "Knowledge.Experience.5_Years",
+                    "description": "A knowledge capability that represents 5 years experience."
+                },
+                {
+                    "const": "Knowledge.Programming.ABAP",
+                    "description": "A knowledge capability that represents ABAP programming skills."
+                },
+                {
+                    "const": "Knowledge.Programming.ABAPOO",
+                    "description": "A knowledge capability that represents ABAP OO programming skills."
+                },
+                {
+                    "const": "Knowledge.Programming.Java",
+                    "description": "A knowledge capability that represents Java programming skills."
+                },
+                {
+                    "const": "Knowledge.Programming.JavaScript",
+                    "description": "A knowledge capability that represents JavaScript programming skills."
+                },
+                {
+                    "const": "Knowledge.Programming.ABAP",
+                    "description": "A knowledge capability that represents ABAP programming skills."
+                },
+                {
+                    "const": "Knowledge.SAP.Architect",
+                    "description": "A knowledge capability that represents SAP system landscape architecting skills."
+                },
+                {
+                    "const": "Knowledge.SAP.FI",
+                    "description": "A knowledge capability that represents SAP Finance module skills."
+                },
+                {
+                    "const": "Knowledge.SAP.CO",
+                    "description": "A knowledge capability that represents SAP Controlling module skills."
+                },
+                {
+                    "const": "Knowledge.SAP.BW",
+                    "description": "A knowledge capability that represents SAP BusinessWarehouse module skills."
+                },
+                {
+                    "const": "Technological.SAP.FI",
+                    "description": "A technological capability that represents the availability of the finance module in a SAP system."
+                }
+            ]
+        },
+        "resourceKinds": {
+            "type": "string",
+            "additionalProperties": false,
+            "oneOf": [
+                {
+                    "const": "Resource.Intangible.Digital.Application",
+                    "description": "This kind of resource represents a digital/software-defined application or programm or a part of it."
+                },
+                {
+                    "const": "Resource.Intangible.Digital.Document",
+                    "description": "This kind of resource represents a digital document."
+                },
+                {
+                    "const": "Resource.Intangible.Digital.Equipment",
+                    "description": "This kind of resource represents a digital equipment or a part of it."
+                },
+                {
+                    "const": "Resource.Intangible.Digital.Media",
+                    "description": "This kind of resource represents a digital media."
+                },
+                {
+                    "const": "Resource.Intangible.IntellectualProperty.License",
+                    "description": "This kind of resource represents a license."
+                },
+                {
+                    "const": "Resource.Intangible.IntellectualProperty.Right",
+                    "description": "This kind of resource represents a right."
+                },
+                {
+                    "const": "Resource.Intangible.IntellectualProperty.Brand",
+                    "description": "This kind of resource represents a brand."
+                },
+                {
+                    "const": "Resource.Tangible.Building",
+                    "description": "This kind of resource represents a building."
+                },
+                {
+                    "const": "Resource.Tangible.Building.Room",
+                    "description": "This kind of resource represents a room in a building."
+                },
+                {
+                    "const": "Resource.Tangible.PhysicalDocument",
+                    "description": "This kind of resource represents a physical document or book."
+                },
+                {
+                    "const": "Resource.Tangible.Technical.Computer",
+                    "description": "This kind of resource represents a computer system."
+                },
+                {
+                    "const": "Resource.Tangible.Technical.Network",
+                    "description": "This kind of resource represents a computer network."
+                },
+                {
+                    "const": "Resource.Tangible.Technical.Storage",
+                    "description": "This kind of resource represents a storage device."
+                }
+            ]
+        },
+        "serviceCommitmentExecutionFlavors": {
+            "type": "string",
+            "additionalProperties": false,
+            "oneOf": [
+                {
+                    "const": "ServiceCommitmentExecutionFlavor.FULLY_AUTOMATED",
+                    "description": "Indicates that the service commitment executes fully-automated with now human involvement."
+                },
+                {
+                    "const": "ServiceCommitmentExecutionFlavor.SEMI_AUTOMATED",
+                    "description": "Indicates that the service commitment executes semi-automated with both system and human involvement."
+                },
+                {
+                    "const": "ServiceCommitmentExecutionFlavor.MANUALLY",
+                    "description": "Indicates that the service commitment executes with human involvement only."
+                }
+                
+            ]
+        },
+        "serviceCommitments": {
+            "type": "string",
+            "additionalProperties": false,
+            "oneOf": [
+                {
+                    "const": "ServiceCommitment.Artifact.Administrate",
+                    "description": "This service commitment represents the administration of an artifact."
+                },
+                {
+                    "const": "ServiceCommitment.Artifact.Analyse",
+                    "description": "This service commitment represents the analysis of an artifact."
+                },
+                {
+                    "const": "ServiceCommitment.Artifact.Check",
+                    "description": "This service commitment represents the check of an artifact."
+                },
+                {
+                    "const": "ServiceCommitment.Artifact.Conceptualize",
+                    "description": "This service commitment represents the conceptualization of an artifact."
+                },
+                {
+                    "const": "ServiceCommitment.Artifact.Design",
+                    "description": "This service commitment represents the design of an artifact."
+                },
+                {
+                    "const": "ServiceCommitment.Artifact.Document",
+                    "description": "This service commitment represents the documentation of an artifact."
+                },
+                {
+                    "const": "ServiceCommitment.Artifact.Implement",
+                    "description": "This service commitment represents the implementation of an artifact."
+                },
+                {
+                    "const": "ServiceCommitment.Artifact.Improve",
+                    "description": "This service commitment represents the improvement of an artifact."
+                },
+                {
+                    "const": "ServiceCommitment.Artifact.Install",
+                    "description": "This service commitment represents the installation of an artifact."
+                },
+                {
+                    "const": "ServiceCommitment.Artifact.Integrate",
+                    "description": "This service commitment represents the integration of an artifact into an existing environment."
+                },
+                {
+                    "const": "ServiceCommitment.Artifact.Monitor",
+                    "description": "This service commitment represents the monitoring of a deployed artifact."
+                },
+                {
+                    "const": "ServiceCommitment.Artifact.Operate",
+                    "description": "This service commitment represents the operation of a deployed artifact."
+                },
+                {
+                    "const": "ServiceCommitment.Artifact.Plan",
+                    "description": "This service commitment represents the planning of an artifact."
+                },
+                {
+                    "const": "ServiceCommitment.Artifact.Process",
+                    "description": "This service commitment represents the processing of an artifact."
+                },
+                {
+                    "const": "ServiceCommitment.Artifact.Provide",
+                    "description": "This service commitment represents the provisioning of an artifact."
+                },
+                {
+                    "const": "ServiceCommitment.Artifact.Realize",
+                    "description": "This service commitment represents the realization of an artifact."
+                },
+                {
+                    "const": "ServiceCommitment.Artifact.Remove",
+                    "description": "This service commitment represents the removement of an artifact."
+                },
+                {
+                    "const": "ServiceCommitment.Artifact.Setup",
+                    "description": "This service commitment represents the setup up of an artifact."
+                },
+                {
+                    "const": "ServiceCommitment.Artifact.Simulate",
+                    "description": "This service commitment represents the simulation of an artifact."
+                },
+                {
+                    "const": "ServiceCommitment.Artifact.Store",
+                    "description": "This service commitment represents the storing of an artifact."
+                },
+                {
+                    "const": "ServiceCommitment.Artifact.Test",
+                    "description": "This service commitment represents the testing of an artifact."
+                },
+                {
+                    "const": "ServiceCommitment.Interaction.Call",
+                    "description": "This service commitment represents a call between actors."
+                },
+                {
+                    "const": "ServiceCommitment.Interaction.Dicuss",
+                    "description": "This service commitment represents a discusison between actors."
+                },
+                {
+                    "const": "ServiceCommitment.Interaction.Interview",
+                    "description": "This service commitment represents an interview to collect information from actors."
+                },
+                {
+                    "const": "ServiceCommitment.Interaction.Meet",
+                    "description": "This service commitment represents a meeting between actors."
+                },
+                {
+                    "const": "ServiceCommitment.Interaction.Present",
+                    "description": "This service commitment represents a presentation of information to actors."
+                },
+                {
+                    "const": "ServiceCommitment.Interaction.Report",
+                    "description": "This service commitment represents a report of information to actors."
+                },
+                {
+                    "const": "ServiceCommitment.Interaction.Train",
+                    "description": "This service commitment represents a transfer of knowledge between actors."
+                },
+                {
+                    "const": "ServiceCommitment.Support.Approve",
+                    "description": "This service commitment represents an approvement."
+                },
+                {
+                    "const": "ServiceCommitment.Support.Audit",
+                    "description": "This service commitment represents an audit."
+                },
+                {
+                    "const": "ServiceCommitment.Support.Calculate",
+                    "description": "This service commitment represents a calculation."
+                },
+                {
+                    "const": "ServiceCommitment.Support.Estimation",
+                    "description": "This service commitment represents an estimation."
+                },
+                {
+                    "const": "ServiceCommitment.Support.Postprocess",
+                    "description": "This service commitment represents a postprocessing of another ServiceCommitment."
+                },
+                {
+                    "const": "ServiceCommitment.Support.Prepare",
+                    "description": "This service commitment represents a preparation of another ServiceCommitment."
+                },
+                {
+                    "const": "ServiceCommitment.Support.ProjectManagement",
+                    "description": "This service commitment represents a project management ServiceCommitment."
+                },
+                {
+                    "const": "ServiceCommitment.Support.QualityAssure",
+                    "description": "This service commitment represents a quality assurance ServiceCommitment."
+                },
+                {
+                    "const": "System.API",
+                    "description": "This service commitment represents a call to an system API."
+                }
+            ]
+        }
+    }
+}

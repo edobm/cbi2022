@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "definitions": {
+    "complexService": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "default": "&CS-ID-000 cs-id-000",
+              "type": "string"
+            },
+            "name": {
+              "default": "Name Template",
+              "type": "string"
+            },
+            "version": {
+              "default": 1,
+              "type": "number"
+            },
+            "description": {
+              "default": "Description Template",
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "version",
+            "description"
+          ]
+        },
+        "specification": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "services": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "service": {
+                        "type": "object",
+                        "properties": {
+                          "ref": {
+                            "description": "Refer to atomic or composite service by its ID by adding *-sign.",
+                            "default": "*CS-ID-000 or *AS-ID-000",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "ref"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "services"
+          ]
+        }
+      },
+      "required": [
+        "metadata",
+        "specification"
+      ]
+    }
+  }
+}

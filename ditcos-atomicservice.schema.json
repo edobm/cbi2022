@@ -1,0 +1,203 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "additionalProperties": false,
+    "definitions": {
+        "atomicService": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+                "metadata": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "default": "&AS-ID-000 as-id-000",
+                            "type": "string"
+                        },
+                        "name": {
+                            "default": "Name Template",
+                            "type": "string"
+                        },
+                        "version": {
+                            "default": 1,
+                            "type": "number"
+                        },
+                        "kind": {
+                            "$ref": "ditcos-shared.schema.json#/definitions/atomicServiceKinds"
+                        },
+                        "description": {
+                            "default": "Description Template",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "id",
+                        "name",
+                        "version",
+                        "kind",
+                        "description"
+                    ]
+                },
+                "serviceCommitments": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "allOf": [
+                            {
+                                "properties": {
+                                    "serviceCommitment": {
+                                        "$ref": "#/definitions/serviceCommitment"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "metadata",
+                "serviceCommitments"
+            ]
+        },
+        "serviceCommitment": {
+            "type": "object",
+            "properties": {
+                "metadata": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "default": "&ACT-ID-000 act-id-000",
+                            "type": "string"
+                        },
+                        "name": {
+                            "default": "Name Template",
+                            "type": "string"
+                        },
+                        "version": {
+                            "default": 1,
+                            "type": "number"
+                        },
+                        "kind": {
+                            "$ref": "ditcos-shared.schema.json#/definitions/serviceCommitments"
+                        },
+                        "description": {
+                            "default": "Description Template",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "id",
+                        "name",
+                        "version",
+                        "kind",
+                        "description"
+                    ]
+                },
+                "specification": {
+                    "type": "object",
+                    "properties": {
+                        "executionFlavor": {
+                            "enum": ["FULLY_AUTOMATED", "SEMI_AUTOMATED", "MANUALLY"]
+                        },
+                        "involvedBusinessRoles": {
+                            "type": "object",
+                            "properties": {
+                                "businessRoleResponsible": {
+                                    "type": "object",
+                                    "properties": {
+                                        "ref": {
+                                            "description": "Refer to a business role by its ID by adding *-sign.",
+                                            "default": "*BR-ID-000",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "ref"
+                                    ]
+                                },
+                                "businessRolesSupporting": {
+                                    "type": "array",
+                                    "minItems": 0,
+                                    "items": {
+                                        "allOf": [
+                                            {
+                                                "type": "object",
+                                                "properties": {
+                                                    "businessRole": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "ref": {
+                                                                "description": "Refer to a business role by its ID by adding *-sign.",
+                                                                "default": "*BR-ID-000",
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "ref"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "businessRole"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "required": [
+                                "businessRoleResponsible"
+                            ]
+                        },
+                        "involvedResources": {
+                            "type": "array",
+                            "minItems": 1,
+                            "items": {
+                                "oneOf": [
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "resource": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "ref": {
+                                                        "description": "Refer to a resource by its ID by adding *-sign.",
+                                                        "default": "*RES-ID-000",
+                                                        "type": "string"
+                                                    },
+                                                    "involvementType": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "GENERATED",
+                                                            "CONSUMED"
+                                                        ]
+                                                    }
+                                                },
+                                                "required": [
+                                                    "ref",
+                                                    "involvementType"
+                                                ]
+                                            }
+                                        },
+                                        "required": [
+                                            "resource"
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "executionFlavor",
+                        "involvedBusinessRoles",
+                        "involvedResources"
+                    ]
+                }
+            },
+            "required": [
+                "metadata",
+                "specification"
+            ]
+        }
+    }
+}
